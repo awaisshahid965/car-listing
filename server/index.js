@@ -10,9 +10,9 @@ const server = http.createServer(app)
 
 const initNodejsApplication = async () => {
   try {
-      await initializeMongoDB()
+    await initializeMongoDB()
     server.listen(PORT, () => {
-        console.log(`Server listening on PORT ${PORT}`)
+      console.log(`Server listening on PORT ${PORT}`)
     })
   } catch (error) {
     console.log(error)

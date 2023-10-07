@@ -1,5 +1,3 @@
 export default function App() {
-  return (
-    <>App Initialized...</>
-  )
+  return <>App Initialized...</>
 }
