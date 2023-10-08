@@ -15,7 +15,7 @@ class VehicleService extends HttpClient {
     return { data, errors }
   }
 
-  static async getAllVehicle(body: FormDataType, token: string) {
+  static async getAllVehicle(token: string) {
     const { data, errors } = await this.get(VehicleEndpoints.GET_ALL_VEHICLE, {
       ...(token && { authorization: `Bearer ${token}` }),
     })
