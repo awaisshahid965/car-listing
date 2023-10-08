@@ -4,10 +4,7 @@ const MONGODB_URL = process.env.MONGODB_URL
 
 async function initializeMongoDB() {
   try {
-    await mongoose.connect(MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    await mongoose.connect(MONGODB_URL)
     console.log('MongoDB connection ready!')
   } catch (error) {
     throw new Error(error.message)
