@@ -1,17 +1,17 @@
-import React, { ChangeEvent, ReactNode } from 'react';
-import { Input } from 'antd';
+import React, { ChangeEvent, ReactNode } from 'react'
+import { Input } from 'antd'
 import classes from './custom-input.module.scss'
 
 interface CustomInputProps {
-  label?: string;
-  name: string;
-  type?: 'text' | 'email' | 'password' | 'number';
-  value?: string | number;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  errorMessage?: string;
-  required?: boolean;
-  disabled?: boolean;
+  label?: string
+  name: string
+  type?: 'text' | 'email' | 'password' | 'number'
+  value?: string | number
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
+  errorMessage?: string
+  required?: boolean
+  disabled?: boolean
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -26,8 +26,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
   disabled = false,
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event);
-  };
+    onChange?.(event)
+  }
 
   return (
     <div className={classes['custom-input']}>
@@ -43,7 +43,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
       />
       {errorMessage && <div className={classes['custom-input__error']}>{errorMessage}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default CustomInput;
+export default CustomInput

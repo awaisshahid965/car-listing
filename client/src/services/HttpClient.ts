@@ -1,9 +1,9 @@
-import { HttpRequestMethods } from "../constants";
+import { HttpRequestMethods } from '../constants'
 
-const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT
 console.log(API_ENDPOINT)
 
-const headerConfig = { "Content-Type": "application/json" };
+const headerConfig = { 'Content-Type': 'application/json' }
 
 class HttpClient {
   static async get(resourcePath: string, headers?: Record<string, string>) {
@@ -11,11 +11,11 @@ class HttpClient {
       method: HttpRequestMethods.GET,
       headers: {
         ...headerConfig,
-        ...headers
-      }
-    });
-    const responseObject = await request.json();
-    return responseObject;
+        ...headers,
+      },
+    })
+    const responseObject = await request.json()
+    return responseObject
   }
 
   static async post(resourcePath: string, body: any, headers?: Record<string, string>) {
@@ -23,13 +23,13 @@ class HttpClient {
       method: HttpRequestMethods.POST,
       headers: {
         ...headerConfig,
-        ...headers
+        ...headers,
       },
       body: JSON.stringify(body),
-    });
-    const responseObject = await request.json();
-    return responseObject;
+    })
+    const responseObject = await request.json()
+    return responseObject
   }
 }
 
-export default HttpClient;
+export default HttpClient
