@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import './globals.css'
 import { Nunito_Sans } from 'next/font/google'
 import StyledComponentsRegistry from '../lib/AntdRegistry'

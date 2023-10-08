@@ -5,44 +5,40 @@ import AuthService from '@/src/services/AuthService'
 import { useRouter } from 'next/navigation'
 
 const AuthContainer: FC<PropsWithChildren> = ({ children }) => {
-    const [authState, setAuthState] = useState(authStateDefaultValues)
-    const router = useRouter()
+  const [authState, setAuthState] = useState(authStateDefaultValues)
+  const router = useRouter()
 
-    const checkAuthOnLoad = async () => {
-        const token = localStorage.getItem('token')
-        const data = await AuthService.valiateUser(token ?? '')
-        !data.isValidUser && router.push('/auth/login')
-        setAuthState((prevState) => ({
-            ...prevState,
-            loading: false,
-            isAuthenticated: data.isValidUser
-        }))
+  const checkAuthOnLoad = async () => {
+    const token = localStorage.getItem('token')
+    const data = await AuthService.valiateUser(token ?? '')
+    !data.isValidUser && router.push('/auth/login')
+    setAuthState((prevState) => ({
+      ...prevState,
+      loading: false,
+      isAuthenticated: data.isValidUser,
+    }))
+  }
+
+  useLayoutEffect(() => {
+    checkAuthOnLoad()
+  }, [])
+
+  const login = async (email: string, password: string) => {
+    const { data, errors } = await AuthService.login({ email, password })
+    if (!!data?.token) {
+      localStorage.setItem('token', data.token)
+      router.push('/')
     }
+    setAuthState((prevState) => ({
+      ...prevState,
+      authErrors: errors,
+    }))
+  }
 
-    useLayoutEffect(() => {
-        checkAuthOnLoad()
-    }, [])
-
-    const login = async (email: string, password: string) => {
-        const {data, errors} = await AuthService.login({email, password})
-        if (!!data?.token) {
-            localStorage.setItem('token', data.token)
-            router.push('/')
-        }
-        setAuthState((prevState) => ({
-            ...prevState,
-            authErrors: errors
-        }))
-    }
-
-    if (authState.loading) {
-        return null
-    }
-  return (
-    <AuthProvider value={{ ...authState, login }}>
-        {children}
-    </AuthProvider>
-  )
+  if (authState.loading) {
+    return null
+  }
+  return <AuthProvider value={{ ...authState, login }}>{children}</AuthProvider>
 }
 
 export default AuthContainer
