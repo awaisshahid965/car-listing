@@ -1,0 +1,29 @@
+.add-vehicle-form {
+  padding: 3rem 4rem;
+  background-color: var(--white);
+  max-width: 90rem;
+  margin: 6rem auto 0;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05);
+
+  &__form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+
+  &__max_files {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+
+    & > *:first-child {
+      width: 100%;
+    }
+  }
+}

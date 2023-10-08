@@ -4,7 +4,7 @@ const {
   generateErrorObjectExpressValidator,
   sendServerResponse,
   getJWTSignedToken,
-  isJWTTokenValid,
+  JWTTokenValidation: isJWTTokenValid,
 } = require('../../utils')
 
 module.exports.loginPostController = async (req, res) => {
@@ -32,6 +32,6 @@ module.exports.loginPostController = async (req, res) => {
 
 module.exports.userAuthenticationStatus = async (req, res) => {
   const token = req.headers.authorization || ''
-  const isTokenValid = isJWTTokenValid(token.slice(7))
+  const { isTokenValid } = isJWTTokenValid(token.slice(7))
   return sendServerResponse(res, { isValidUser: isTokenValid })
 }

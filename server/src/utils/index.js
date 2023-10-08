@@ -57,7 +57,7 @@ module.exports.sendServerResponse = (responseInstance, data, errors = {}, status
   return responseInstance.status(status ?? 200).json(successResponseData)
 }
 
-module.exports.isJWTTokenValid = (token) => {
+module.exports.JWTTokenValidation = (token) => {
   if (!token) {
     return false
   }
@@ -69,11 +69,17 @@ module.exports.isJWTTokenValid = (token) => {
     const isTokenExpired = decodedData.exp <= currentTime
 
     if (!isUserIdValid || isTokenExpired) {
-      return false
+      throw new Error()
     }
 
-    return true
+    return {
+      isTokenValid: true,
+      decodedData,
+    }
   } catch (_) {
-    return false
+    return {
+      isTokenValid: false,
+      decodedData: {},
+    }
   }
 }

@@ -35,7 +35,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
       <Input
         type={type}
         name={name}
-        value={value?.toString()}
+        defaultValue={value?.toString()}
         onChange={handleChange}
         placeholder={placeholder}
         required={required}

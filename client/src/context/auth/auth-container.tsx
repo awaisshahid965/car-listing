@@ -8,6 +8,8 @@ const AuthContainer: FC<PropsWithChildren> = ({ children }) => {
   const [authState, setAuthState] = useState(authStateDefaultValues)
   const router = useRouter()
 
+  const getAuthToken = () => localStorage.getItem('token') ?? ''
+
   const checkAuthOnLoad = async () => {
     const token = localStorage.getItem('token')
     const data = await AuthService.valiateUser(token ?? '')
@@ -21,6 +23,7 @@ const AuthContainer: FC<PropsWithChildren> = ({ children }) => {
 
   useLayoutEffect(() => {
     checkAuthOnLoad()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const login = async (email: string, password: string) => {
@@ -38,7 +41,7 @@ const AuthContainer: FC<PropsWithChildren> = ({ children }) => {
   if (authState.loading) {
     return null
   }
-  return <AuthProvider value={{ ...authState, login }}>{children}</AuthProvider>
+  return <AuthProvider value={{ ...authState, login, getAuthToken }}>{children}</AuthProvider>
 }
 
 export default AuthContainer

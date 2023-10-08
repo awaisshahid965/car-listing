@@ -1,11 +1,12 @@
-const { isJWTTokenValid, sendServerResponse } = require('../utils')
+const { JWTTokenValidation, sendServerResponse } = require('../utils')
 
 const authenticateRequestMiddleware = (req, res, next) => {
   const token = req.headers.authorization || ''
-  const isTokenValid = isJWTTokenValid(token.slice(7))
+  const { isTokenValid, decodedData } = JWTTokenValidation(token.slice(7))
   if (!isTokenValid) {
     return sendServerResponse(res, null, { error: 'Authentication failed: Invalid token' }, 401)
   }
+  req.userId = decodedData.userId
   next()
 }
 
